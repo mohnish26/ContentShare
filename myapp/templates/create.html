@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+  <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">Create New Product</h2>
+  <form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto bg-dark-gray shadow-md rounded px-8 pt-1 pb-8 mb-4"> 
+    {% csrf_token %}
+
+    <div class="mb-1">
+      <label for="name" class="block mb-2 text-lg font-medium ">Name</label> 
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        class="block w-full p-4  border border-gray-400 rounded-lg bg-gray-300 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required
+        placeholder="Enter product name..." 
+      >
+    </div>
+
+    <div class=" mb-1">
+      <label for="slug" class="block mb-2 text-lg font-medium  ">Slug</label>
+      <input 
+        type="text" 
+        id="slug" 
+        name="slug" 
+        class="block w-full p-4  border border-gray-400 rounded-lg bg-gray-300 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        required
+        placeholder="Enter product slug..." 
+      >
+    </div>
+
+    <div class=" mb-1">
+      <label for="thumbnail" class="block mb-2 text-lg font-medium  ">Thumbnail</label>
+      <input 
+        type="file" 
+        id="thumbnail" 
+        name="thumbnail" 
+        class="block w-full text-sm  border border-gray-400 rounded-lg cursor-pointer bg-gray-300 dark:text-gray-400 focus:outline-none dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400" 
+        required
+      >
+    </div>
+
+    <div class=" mb-1">
+      <label for="category" class="block mb-2 text-lg font-medium  ">Category</label>
+      <select 
+        id="category" 
+        name="category" 
+        class="bg-gray-300 border border-gray-400  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        required
+      >
+        {% for category in categories %}
+        <option value="{{ category.id }}" class=" ">{{ category.title }}</option> 
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class=" mb-1">
+      <label for="brand" class="block mb-2 text-lg font-medium  ">Brand</label>
+      <select 
+        id="brand" 
+        name="brand" 
+        class="bg-gray-300 border border-gray-400  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        required
+      >
+        {% for brand in brands %}
+        <option value="{{ brand.id }}" class=" ">{{ brand.title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class=" mb-1">
+      <label for="description" class="block mb-2 text-lg font-medium  ">Description</label>
+      <textarea 
+        id="description" 
+        name="description" 
+        class="block w-full p-4  border border-gray-400 rounded-lg bg-gray-300 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        rows="3" 
+        required
+      ></textarea>
+    </div>
+
+    <div class=" mb-1">
+      <label for="price" class="block mb-2 text-lg font-medium  ">Price</label>
+      <input 
+        type="number" 
+        id="price" 
+        name="price" 
+        class="block w-full p-4  border border-gray-400 rounded-lg bg-gray-300 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        required
+        placeholder="Enter price..." 
+      >
+    </div>
+
+    <div class="flex items-center  mb-1">
+        <input 
+          id="is_featured" 
+          type="checkbox" 
+          value="" 
+          class="w-4 h-4 text-blue-600 bg-gray-300 border-gray-400 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-300 dark:border-gray-600"
+          name="is_featured"
+        >
+        <label for="is_featured" class="ms-2 mt-1 text-lg font-medium ">Featured</label>
+    </div>
+
+    <div class=" mb-1">
+      <label for="images" class="block mb-2 text-lg font-medium  ">Images</label>
+      <input 
+        type="file" 
+        id="images" 
+        name="images" 
+        class="block w-full text-sm  border border-gray-400 rounded-lg cursor-pointer bg-gray-300 dark:text-gray-400 focus:outline-none dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400" 
+        multiple
+        required
+      >
+    </div>
+
+    <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto">
+      Create Product
+    </button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+1. To check if Python is installed on your system,
+   run the command python --version
+     
+    If Python is not installed,
+      you can download it from https://www.python.org/downloads/.
+
+2.  Once you have installed Python,
+    you can check if PIP is installed on your system by running the command pip --version
+      
+    If PIP is not installed,
+      you can download the "get-pip.py" script from the official Python website and run it using the command python get-pip.py in the command prompt.
+
+4. You can create a virtual environment
+   using the command python -m venv my_env where "my_env" is the name of your choice for the virtual environment.
+
+5. To activate the virtual environment,
+    run the command my_env\Scripts\activate.bat
+
+6.  You can install Django using PIP
+    by running the command python -m pip install Django
+    
+7.  To check the Django version, 
+    you can run the command django-admin --version
+
+8.  To create a new Django project,
+    run the command django-admin startproject myproject .
+
+9.  To create a new application within a Django project,
+    run the command python manage.py startapp myapp
+
+10.  Run the commands python manage.py migrate and python manage.py runserver to migrate the database and start the development server.
+
+11. In the myproject/urls.py file, add the following code:
+
+    from django.contrib import admin
+    from django.urls import include, path
+
+    urlpatterns = [
+        path('', include('myapp.urls')),
+        path('admin/', admin.site.urls),
+    ]
+
+
+12. In the myapp/views.py file, add the following code:
+
+from django.http import HttpResponse
+from django.template import loader
+
+def myapp(request):
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render())
+
+
+13.  In the myapp/urls.py file, add the following code:
+
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path('', views.myapp, name='myapp'),
+    ]
+
+
+14. Create a templates folder inside the myapp folder, and create an HTML file named index.html
+
+15. In the myproject/settings.py file, add 'myapp' to the INSTALLED_APPS list.
+
+16. Run the commands py manage.py migrate and py manage.py runserver to migrate the database and start the development server.
