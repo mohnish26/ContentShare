@@ -27,77 +27,109 @@
 </div>
 <br>
 
-<section class="bg-gradient-to-b from-gray-50 to-gray-100 py-8 antialiased dark:bg-gray-900 md:py-10">
-  <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    <!-- Heading -->
-    <div class="mb-6 flex items-end justify-between space-y-4 sm:space-y-0">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">Top Selling Products</h2>
+<div class="container">
+  <div class="heading heading-center mb-3">
+    <h2 class="title">Top Selling Products</h2><!-- End .title -->
 
-      <!-- Tab Navigation -->
-      <ul class="flex space-x-4 text-base font-medium text-gray-700 dark:text-gray-300">
-        <li><a href="#top-all-tab" class="border-b-2 border-transparent hover:border-blue-500 transition" id="top-all-link">All</a></li>
-        <li><a href="#top-fur-tab" class="border-b-2 border-transparent hover:border-blue-500 transition" id="top-fur-link">Furniture</a></li>
-        <li><a href="#top-decor-tab" class="border-b-2 border-transparent hover:border-blue-500 transition" id="top-decor-link">Decoration</a></li>
-        <li><a href="#top-light-tab" class="border-b-2 border-transparent hover:border-blue-500 transition" id="top-light-link">Lighting</a></li>
-      </ul>
-    </div>
+    <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="top-all-link" data-toggle="tab" href="#top-all-tab" role="tab"
+          aria-controls="top-all-tab" aria-selected="true">All</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="top-fur-link" data-toggle="tab" href="#top-fur-tab" role="tab"
+          aria-controls="top-fur-tab" aria-selected="false">Furniture</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="top-decor-link" data-toggle="tab" href="#top-decor-tab" role="tab"
+          aria-controls="top-decor-tab" aria-selected="false">Decoration</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="top-light-link" data-toggle="tab" href="#top-light-tab" role="tab"
+          aria-controls="top-light-tab" aria-selected="false">Lighting</a>
+      </li>
+    </ul>
+  </div><!-- End .heading -->
 
-    <!-- Products Grid -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="top-all-tab">
-        <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <div class="tab-content ">
+    <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
+      <div class="products">
+        <div class="row justify-content-center">
           {% for product in data %}
-          <div class="relative product bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition p-4">
-            <figure class="relative product-media">
-              <a href="/product/{{ product.slug }}/{{ product.id }}">
-                <img src="/media/{{ product.thumbnail }}" alt="Product image" class="w-full h-auto object-cover rounded-lg mb-3 transition-transform transform hover:scale-105">
-              </a>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+            <div class="product product-11 text-center shadow-xl ">
+              <figure class="product-media">
+                <a href="/product/{{ product.slug }}/{{ product.id }}">
+                  <img src="/media/{{ product.thumbnail }}" alt="Product image" class="product-image">
+                  <img src="/media/{{ product.thumbnail }}" alt="Product image" class="product-image-hover">
+                </a>
 
-              <!-- Wishlist Icon -->
-              <div class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 p-2 shadow-sm transition hover:bg-blue-500">
-                <button class="add-wishlist text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-pink-500" data-product="{{ product.id }}">
-                  <span class="sr-only">Add to wishlist</span>
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
-                  </svg>
-                  
-                </button>
+                <div class="product-action-vertical">
+                  <a href="#" class="btn-product-icon add-wishlist" data-product="{{ product.id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                          <path d="M8 6.236L7.029 5.25C5.233 3.548 2.5 4.432 2.5 6.975c0 1.275.647 2.517 1.643 3.513l.01.01L8 12.582l3.847-3.995.01-.01C13.853 9.492 14.5 8.25 14.5 6.975c0-2.543-2.733-3.427-4.53-1.725L8 6.236z"/>
+                      </svg>
+                      <span>add to wishlist</span>
+                  </a>
               </div>
-            </figure>
+              <!-- End .product-action-vertical -->
+              </figure><!-- End .product-media -->
 
-            <div class="product-body text-center">
-              <h3 class="text-base font-semibold "><a href="/product/{{ product.slug }}/{{ product.id }}" class="hover:text-blue-500 transition">{{ product.name }}</a></h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400">Lighting</p>
+              <div class="product-body ">
+                <div class="product-cat">
+                  <a href="#">Lighting</a>
+                </div><!-- End .product-cat -->
+                <h3 class="product-title"><a href="/product/{{ product.slug }}/{{ product.id }}">{{ product.name }}</a>
+                </h3><!-- End .product-title -->
+                <div class="product-price">
+                  <h6 class="text-3xl font-bold">$ <span class="product-price-{{ product.id }} ">{{ product.price }}</span></h6>
+                </div><!-- End .product-price -->
+              </div><!-- End .product-body -->
 
-              <!-- Product Price -->
-              <div class="product-price mt-2 text-3xl font-bold text-blue-600">
-                $<span>{{ product.price }}</span>
-              </div>
+              <input type="hidden" value="1" class="form-control product-qty-{{ product.id }}" />
+              <input type="hidden" class="product-image-{{ product.id }}" value="{{ product.thumbnail }}" />
+              <input type="hidden" class="product-id-{{ product.id }}" value="{{ product.id }}" />
+              <input type="hidden" class="product-title-{{ product.id }}" value="{{ product.name }}" />
+              <input type="hidden" class="product-price-{{ product.id }}" value="{{ product.price }}" />
 
-              <!-- Add to Cart -->
-              <div class="mt-4">
-                <button class="w-full bg-blue-600 text-white py-2 rounded-lg shadow-sm hover:bg-blue-700 transition" data-index="{{ product.id }}">
-                  Add to cart
-                </button>
-              </div>
-              
-            </div>
+              <div class="product-action-s">
+                <a href="#" class="btn-product add-to-cart text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-1 " title="Add to cart" data-index="{{ product.id }}"><span>add
+                    to cart</span></a>
+                <a href="#" class="btn-product buy-now text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" title="Buy Now" data-index="{{ product.id }}"><span>Buy Now</span></a> <!-- Add Buy Now Functionality to work-->
+                
+              </div><!-- End .product-action -->
 
-            <!-- Hidden Inputs -->
-            <input type="hidden" value="1" class="form-control product-qty-{{ product.id }}">
-            <input type="hidden" class="product-image-{{ product.id }}" value="{{ product.thumbnail }}">
-            <input type="hidden" class="product-id-{{ product.id }}" value="{{ product.id }}">
-            <input type="hidden" class="product-title-{{ product.id }}" value="{{ product.name }}">
-            <input type="hidden" class="product-price-{{ product.id }}" value="{{ product.price }}">
-          </div>
+            </div><!-- End .product -->
+          </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
           {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </div><!-- End .row -->
+      </div><!-- End .products -->
 
-
-
+    </div><!-- End .tab-content -->
+  </div><!-- End .container -->
 
   {% endblock %}
+
+  <style>
+    /* Neon Glow Effects */
+    .neon-text {
+      text-shadow: 0 0 10px rgba(99, 255, 245, 0.7), 0 0 20px rgba(99, 255, 245, 0.7);
+    }
+  
+    .neon-border {
+      border: 1px solid rgba(99, 255, 245, 0.5);
+      box-shadow: 0 0 15px rgba(99, 255, 245, 0.5), 0 0 35px rgba(99, 255, 245, 0.4);
+    }
+  
+    /* Active Tab Neon Effect */
+    .tab-button.active {
+      background-color: rgba(99, 255, 245, 0.1);
+      border: 1px solid rgba(99, 255, 245, 0.6);
+      box-shadow: 0 0 10px rgba(99, 255, 245, 0.5), 0 0 20px rgba(99, 255, 245, 0.3);
+    }
+  
+    /* Tab Button Hover Effect */
+    .tab-button:hover {
+      background-color: rgba(99, 255, 245, 0.2);
+    }
+  </style>

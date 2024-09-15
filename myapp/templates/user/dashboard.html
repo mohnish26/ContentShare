@@ -1,45 +1,91 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<main class="container my-4">
-	<!-- Featured Products -->
-	<h3 class="my-4 border-bottom pb-1">My Dashboard</h3>
-	<div class="row">
-		<div class="col-md-3">
-			{% include 'user/user-sidebar.html' %}
-		</div>
-		<div class="col-md-9">
-			<div>
-			  <canvas id="myChart"></canvas>
-			</div>
-		</div>
-	</div>
+<main class="container mx-auto py-8">
+    <!-- Dashboard Header -->
+    <h3 class="text-3xl font-bold mb-6 border-b-2 border-gray-800 pb-2 text-gray-800 ">My Dashboard</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <!-- Sidebar -->
+        <div class="col-span-1">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6 neon-border">
+                {% include 'user/user-sidebar.html' %}
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-span-3">
+            <div class="bg-gray-900 rounded-lg p-6 shadow-xl neon-border">
+                <canvas id="myChart" class="w-full h-64"></canvas>
+            </div>
+        </div>
+    </div>
 </main>
 
+<!-- Chart.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
-	const labels = {{monthNumber|safe}};
-	const data = {
-	  labels: labels,
-	  datasets: [{
-	    label: 'Orders By Month',
-	    backgroundColor: 'rgb(255, 99, 132)',
-	    borderColor: 'rgb(255, 99, 132)',
-	    data: {{totalOrders}},
-	  }]
-	};
+    const labels = {{ monthNumber|safe }};
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Orders By Month',
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            hoverBackgroundColor: 'rgba(255, 99, 132, 0.5)',
+            data: {{ totalOrders }},
+        }]
+    };
 
-	const config = {
-	  type: 'bar',
-	  data,
-	  options: {}
-	};
+    const config = {
+        type: 'bar',
+        data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.9)',
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.9)',
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)',
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'rgba(255, 255, 255, 0.9)',
+                    }
+                }
+            }
+        }
+    };
 
-	var myChart = new Chart(
-	    document.getElementById('myChart'),
-	    config
-  	);
-
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
 </script>
 
+<style>
+    /* Neon Effects */
+    .neon-text {
+        text-shadow: 0 0 8px rgba(58, 227, 116, 0.7), 0 0 16px rgba(58, 227, 116, 0.7);
+    }
+    .neon-border {
+        border: 1px solid rgba(58, 227, 116, 0.6);
+        box-shadow: 0 0 10px rgba(58, 227, 116, 0.7), 0 0 30px rgba(58, 227, 116, 0.5);
+    }
+</style>
 {% endblock %}
