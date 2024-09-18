@@ -63,232 +63,302 @@
             }
           </style>
 
-          <div class="col-md-6">
-            <div class="container" id="toolContainer">
+<div class="container mx-auto mt-10">
+  <div class="flex gap-5">
+    <div class="md:w-1/2">
+      <div class="flex flex-col">
+        <div class="w-full relative overflow-hidden rounded-md  mb-4">
+          <div id="fileSlider" class="w-full" data-swiper-slide-per-view="1" data-swiper-loop="true" data-swiper-navigation="true" data-swiper-pagination="true">
+            <div class="swiper-wrapper">
               {% for image in images %}
-              <div class="tool">
+              <div class="swiper-slide px-4 py-6">
+                <div class="flex items-center mb-4">
+                  <div class="file-icon flex items-center justify-center rounded-full bg-gray-200 w-10 h-10 mr-3">
+                    {% if image.file_type == 'image' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0L8 8m4-4l4 4m-4-4l4 4" />
+                    </svg>
+                    {% elif image.file_type == 'video' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4 4L21 6" />
+                    </svg>
+                    {% elif image.file_type == 'audio' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4 4L21 6" />
+                    </svg>
+                    {% elif image.file_type == 'pdf' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm-1-12h3m2-3h-7a3 3 0 00-3 3v6a3 3 0 003 3h7a3 3 0 003-3v-6a3 3 0 00-3-3zm-3-3h7a3 3 0 013 3v6a3 3 0 01-3 3h-7a3 3 0 01-3-3v-6a3 3 0 013-3z" />
+                    </svg>
+                    {% elif image.file_type == 'word' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm-1-12h3m2-3h-7a3 3 0 00-3 3v6a3 3 0 003 3h7a3 3 0 003-3v-6a3 3 0 00-3-3zm-3-3h7a3 3 0 013 3v6a3 3 0 01-3 3h-7a3 3 0 01-3-3v-6a3 3 0 013-3z" />
+                    </svg>
+                    {% elif image.file_type == 'excel' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm-1-12h3m2-3h-7a3 3 0 00-3 3v6a3 3 0 003 3h7a3 3 0 003-3v-6a3 3 0 00-3-3zm-3-3h7a3 3 0 013 3v6a3 3 0 01-3 3h-7a3 3 0 01-3-3v-6a3 3 0 013-3z" />
+                    </svg>
+                    {% elif image.file_type == 'powerpoint' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm-1-12h3m2-3h-7a3 3 0 00-3 3v6a3 3 0 003 3h7a3 3 0 003-3v-6a3 3 0 00-3-3zm-3-3h7a3 3 0 013 3v6a3 3 0 01-3 3h-7a3 3 0 01-3-3v-6a3 3 0 013-3z" />
+                    </svg>
+                    {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm-1-12h3m2-3h-7a3 3 0 00-3 3v6a3 3 0 003 3h7a3 3 0 003-3v-6a3 3 0 00-3-3zm-3-3h7a3 3 0 013 3v6a3 3 0 01-3 3h-7a3 3 0 01-3-3v-6a3 3 0 013-3z" />
+                    </svg>
+                    {% endif %}
+                  </div>
+                  <h6 class="ml-3 font-medium text-gray-800">{{ image.images.name }}</h6>
+                </div>
+
                 {% if image.file_type == 'image' %}
-                <i class="fas fa-file-image"></i>
                 <div class="preview-container">
-                  <img src="{{ image.images.url }}" alt="{{ image.images.name }}"
-                    onerror="this.onerror=null;this.parentElement.innerHTML+='<p class=\'file-error\'>Error loading image</p>';">
+                  <img src="{{ image.images.url }}" alt="{{ image.images.name }}" 
+                        onerror="this.onerror=null;this.parentElement.innerHTML+='<p class=\'file-error text-red-500\'>Error loading image</p>';">
                 </div>
                 {% elif image.file_type == 'video' %}
-                <i class="fas fa-file-video"></i>
                 <div class="preview-container">
-                  <video controls>
+                  <video controls class="w-full">
                     <source src="{{ image.images.url }}" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
                 </div>
                 {% elif image.file_type == 'audio' %}
-                <i class="fas fa-file-audio"></i>
-                <audio controls>
+                <audio controls class="w-full">
                   <source src="{{ image.images.url }}" type="audio/mpeg">
                   Your browser does not support the audio element.
                 </audio>
                 {% elif image.file_type == 'pdf' %}
-                <i class="fas fa-file-pdf"></i>
                 <div class="preview-container">
-                  <iframe src="{{ image.images.url }}" width="100%" height="100%"></iframe>
+                  <iframe src="{{ image.images.url }}" width="100%" height="300" frameborder="0"></iframe>
                 </div>
-                {% elif image.file_type == 'word' %}
-                <i class="fas fa-file-word"></i>
-                {% elif image.file_type == 'excel' %}
-                <i class="fas fa-file-excel"></i>
-                {% elif image.file_type == 'powerpoint' %}
-                <i class="fas fa-file-powerpoint"></i>
-                {% else %}
-                <i class="fas fa-file"></i>
+                
                 {% endif %}
-                <h6>{{ image.images.name }}</h6>
-                <a href="{{ image.images.url }}" class="download-link" download>Download</a>
+
+                <a href="{{ image.images.url }}" class="download-link block mt-2 text-blue-500 hover:text-blue-600" download>Download</a>
               </div>
-              {% empty %}
-              <p>No files available.</p>
               {% endfor %}
             </div>
 
-            <nav class="product-pager ml-auto" aria-label="Product">
-              <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
-                <i class="icon-angle-left"></i>
-                <span>Prev</span>
-              </a>
-
-              <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
-                <span>Next</span>
-                <i class="icon-angle-right"></i>
-              </a>
-            </nav><!-- End .pager-nav -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-              $(document).ready(function () {
-                $('.video-list video').click(function () {
-                  // Remove 'active' class from all videos and add it to the clicked one
-                  $(this).addClass('active').siblings().removeClass('active');
-                  // Get the source of the clicked video
-                  let src = $(this).attr('src');
-                  // Set the source of the main video to the clicked video
-                  $('.main-video video').attr('src', src);
-                });
-              });
-            </script>
-          </div><!-- End .col-md-6 -->
-
-          <div class="col-md-6">
-            <div class="product-details">
-              <h1 class="product-title">Dark yellow lace cut out swing dress</h1>
-              <!-- End .product-title -->
-
-              <div class="ratings-container">
-                <div class="ratings">
-                  <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                </div><!-- End .ratings -->
-                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-              </div><!-- End .rating-container -->
-
-              <div class="product-price">
-                $84.00
-              </div><!-- End .product-price -->
-
-              <div class="product-content">
-                <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus
-                  libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
-              </div><!-- End .product-content -->
-
-              <br>
-              <br>
-              <div class="input-group my-3" style="width:30%;">
-                <input type="number" value="1" class="form-control product-qty-{{data.id}}" id="productQty" />
-                <div class="input-group-append">
-                  <input type="hidden" class="product-image-{{data.id}}" value="{{data.image}}" />
-                  <input type="hidden" class="product-id-{{data.id}}" value="{{data.id}}" />
-                  <input type="hidden" class="product-title-{{data.id}}" value="{{data.title}}" />
-                  <input type="hidden" class="product-price-{{ product.id }}" value="{{ data.price }}" />
-                  <button class="btn btn-primary btn-sm add-to-cart" data-index="{{data.id}}" type="button"
-                    id="addToCartBtn"><i class="fa fa-shopping-cart"></i> Add to
-                    Cart</button>
-                </div>
-              </div>
-            </div><!-- End .product-body -->
-          </div><!-- End .product-details-action -->
-
-          <div class="product-details-footer">
-            <div class="product-cat">
-              <span>Category:</span>
-              <a href="#">Women</a>,
-              <a href="#">Dresses</a>,
-              <a href="#">Yellow</a>
-            </div><!-- End .product-cat -->
-
-            <div class="social-icons social-icons-sm">
-              <span class="social-label">Share:</span>
-              <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-              <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-              <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-              <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev absolute top-1/2 -translate-y-1/2 left-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
             </div>
-          </div><!-- End .product-details-footer -->
-        </div><!-- End .product-details -->
-      </div><!-- End .col-md-6 -->
-    </div><!-- End .row -->
-  </div><!-- End .product-details-top -->
+            <div class="swiper-button-next absolute top-1/2 -translate-y-1/2 right-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="md:w-1/2">
+    <div class="product-details">
+      <h1 class="product-title text-2xl font-bold mb-2">Dark yellow lace cut out swing dress</h1>
 
-  <div class="product-details-tab">
-    <ul class="nav nav-pills justify-content-center" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab"
-          aria-controls="product-desc-tab" aria-selected="true">Description</a>
+      <div class="ratings-container mb-2">
+        <div class="ratings">
+          <div class="ratings-val" style="width: 80%;"></div>
+        </div>
+        <a class="ratings-text text-gray-500" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+      </div>
+
+      <div class="product-price text-lg font-semibold mb-4">
+        $84.00
+      </div>
+
+      <div class="product-content mb-4">
+        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus
+          libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+      </div>
+
+      <div class="flex items-center mb-4 w-auto rounded-md">
+        <div class="relative">
+          <input type="number" value="1" class="px-4 py-2 text-gray-800 w-24" id="productQty-{{data.id}}" min="1" max="5" />
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg class="h-4 w-4 fill-current text-gray-500" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </span>
+        </div>
+        <button class="px-4 py-2 ml-2 bg-blue-500 text-white font-bold rounded-md" data-index="{{data.id}}" type="button" id="addToCartBtn-{{data.id}}">
+          <i class="fa fa-shopping-cart"></i> Add to Cart
+        </button>
+        <input type="hidden" class="product-image-{{data.id}}" value="{{data.image}}" />
+        <input type="hidden" class="product-id-{{data.id}}" value="{{data.id}}" />
+        <input type="hidden" class="product-title-{{data.id}}" value="{{data.title}}" />
+        <input type="hidden" class="product-price-{{ product.id }}" value="{{ data.price }}" />
+      </div>
+    
+    
+
+      
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('#fileSlider', {
+      // Optional parameters
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  </script>
+</div><!-- End .product-details-top -->
+<div class="product-details-footer">
+  <div class="product-cat mb-2">
+    <span>Category:</span>
+    <a href="#">Women</a>,
+    <a href="#">Dresses</a>,
+    <a href="#">Yellow</a>
+  </div>
+
+  <div class="social-icons social-icons-sm mb-2">
+    <span class="social-label">Share:</span>
+    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+  </div>
+</div>
+
+  <div x-data="{ activeTab: 'product-desc-tab' }" class="product-details-tab container mx-auto mt-10">
+    <ul class="nav nav-tabs flex justify-center" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button 
+          class="nav-link" 
+          :class="{ 'active': activeTab === 'product-desc-tab' }"
+          @click="activeTab = 'product-desc-tab'"
+          id="product-desc-link" 
+          role="tab" 
+          aria-controls="product-desc-tab" 
+          aria-selected="true">
+          Description
+        </button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab"
-          aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+      <li class="nav-item" role="presentation">
+        <button 
+          class="nav-link" 
+          :class="{ 'active': activeTab === 'product-info-tab' }" 
+          @click="activeTab = 'product-info-tab'"
+          id="product-info-link" 
+          role="tab" 
+          aria-controls="product-info-tab" 
+          aria-selected="false">
+          Additional Information
+        </button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab"
-          aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
+      <li class="nav-item" role="presentation">
+        <button 
+          class="nav-link" 
+          :class="{ 'active': activeTab === 'product-shipping-tab' }" 
+          @click="activeTab = 'product-shipping-tab'"
+          id="product-shipping-link" 
+          role="tab" 
+          aria-controls="product-shipping-tab" 
+          aria-selected="false">
+          Shipping & Returns
+        </button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab"
-          aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+      <li class="nav-item" role="presentation">
+        <button 
+          class="nav-link" 
+          :class="{ 'active': activeTab === 'product-review-tab' }" 
+          @click="activeTab = 'product-review-tab'"
+          id="product-review-link" 
+          role="tab" 
+          aria-controls="product-review-tab" 
+          aria-selected="false">
+          Reviews (2)
+        </button>
       </li>
     </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+
+    <div class="tab-content mt-4">
+      <div 
+        class="tab-pane fade" 
+        :class="{ 'show active': activeTab === 'product-desc-tab' }" 
+        id="product-desc-tab" 
+        role="tabpanel" 
+        aria-labelledby="product-desc-link"
+      >
         <div class="product-desc-content">
-          <h3>Product Information</h3>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
-            eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-            pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
-            Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec
-            consectetuer ligula vulputate sem tristique cursus. </p>
-          <ul>
-            <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
+          <h3 class="text-xl font-bold mb-2">Product Information</h3>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus.</p>
+          <ul class="list-disc ml-5">
+            <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit.</li>
             <li>Vivamus finibus vel mauris ut vehicula.</li>
             <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
           </ul>
-
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
-            eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-            pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
-            Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec
-            consectetuer ligula vulputate sem tristique cursus. </p>
-        </div><!-- End .product-desc-content -->
-      </div><!-- .End .tab-pane -->
-      <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus.</p>
+        </div>
+      </div>
+      <div 
+        class="tab-pane fade" 
+        :class="{ 'show active': activeTab === 'product-info-tab' }" 
+        id="product-info-tab" 
+        role="tabpanel" 
+        aria-labelledby="product-info-link"
+      >
         <div class="product-desc-content">
-          <h3>Information</h3>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
-            eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-            pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
-          </p>
-
-          <h3>Fabric & care</h3>
-          <ul>
+          <h3 class="text-xl font-bold mb-2">Information</h3>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.</p>
+          <h3 class="text-xl font-bold mb-2 mt-4">Fabric & Care</h3>
+          <ul class="list-disc ml-5">
             <li>Faux suede fabric</li>
             <li>Gold tone metal hoop handles.</li>
             <li>RI branding</li>
             <li>Snake print trim interior </li>
             <li>Adjustable cross body strap</li>
-            <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+            <li>Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
           </ul>
-
-          <h3>Size</h3>
+          <h3 class="text-xl font-bold mb-2 mt-4">Size</h3>
           <p>one size</p>
-        </div><!-- End .product-desc-content -->
-      </div><!-- .End .tab-pane -->
-      <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+        </div>
+      </div>
+      <div 
+        class="tab-pane fade" 
+        :class="{ 'show active': activeTab === 'product-shipping-tab' }" 
+        id="product-shipping-tab" 
+        role="tabpanel" 
+        aria-labelledby="product-shipping-link"
+      >
         <div class="product-desc-content">
-          <h3>Delivery & returns</h3>
-          <p>We deliver to over 100 countries around the world. For full details of the delivery options we
-            offer, please view our <a href="#">Delivery information</a><br>
-            We hope you’ll love every purchase, but if you ever need to return an item you can do so within
-            a month of receipt. For full details of how to make a return, please view our <a href="#">Returns
-              information</a></p>
-        </div><!-- End .product-desc-content -->
-      </div><!-- .End .tab-pane -->
-      <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+          <h3 class="text-xl font-bold mb-2">Delivery & Returns</h3>
+          <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br> We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
+        </div>
+      </div>
+      <div 
+        class="tab-pane fade" 
+        :class="{ 'show active': activeTab === 'product-review-tab' }" 
+        id="product-review-tab" 
+        role="tabpanel" 
+        aria-labelledby="product-review-link"
+      >
         <div class="reviews">
-          <h3 class="my-3">Reviews - <span class="avg-rating">{{avg_reviews.avg_rating}}</span>/5 <i
-              class="fa fa-star text-warning"></i>
-            {% if user.is_authenticated %}
-            {% if canAdd %}
-            <button data-toggle="modal" data-target="#productReview" type="button"
-              class="btn btn-warning btn-sm float-right reviewBtn">Add Review</button>
-            {% endif %}
-            {% endif %}
-          </h3>
-          {% if user.is_authenticated %}
-          <!-- Product Review -->
-          <div class="modal fade" id="productReview" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+          <h3 class="text-xl font-bold mb-2">Reviews - <span class="avg-rating">{{avg_reviews.avg_rating}}</span>/5 <i class="fa fa-star text-warning"></i></h3>
+          <button data-bs-toggle="modal" data-bs-target="#productReview" type="button" class="btn btn-warning btn-sm float-right reviewBtn">Add Review</button>
+
+          <div class="modal fade" id="productReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Add Product Review</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <form method="post" id="addForm" action="{% url 'save-review' data.id %}">
@@ -308,48 +378,42 @@
               </div>
             </div>
           </div>
-          <!-- Product Review End -->
-          {% endif %}
-          <div class="review">
+
+          <div class="review mt-4">
             <div class="row no-gutters">
               <div class="col-auto">
                 <h4><a href="#">Samanta J.</a></h4>
                 <div class="ratings-container">
                   <div class="ratings">
-                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                  </div><!-- End .ratings -->
-                </div><!-- End .rating-container -->
+                    <div class="ratings-val" style="width: 80%;"></div>
+                  </div>
+                </div>
                 <span class="review-date">6 days ago</span>
-              </div><!-- End .col -->
+              </div>
               <div class="col">
                 <h4>Good, perfect size</h4>
-
                 <div class="review-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores
-                    assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis
-                    commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae
-                    voluptas!</p>
-                </div><!-- End .review-content -->
-
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                </div>
                 <div class="review-action">
                   <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
                   <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                </div><!-- End .review-action -->
-              </div><!-- End .col-auto -->
-            </div><!-- End .row -->
-          </div><!-- End .review -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End .product-details-tab -->
 
-        </div><!-- End .reviews -->
-      </div><!-- .End .tab-pane -->
-    </div><!-- End .tab-content -->
-  </div><!-- End .product-details-tab -->
+<h2 class="text-2xl font-bold text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
 
-  <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
-
-  <div class="row">
+  <div class="row px-5">
     {% for product in related %}
     <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
-        <div class="product product-11 text-center">
+        <div class="product product-11 text-center drop-shadow-xl	">
           <figure class="product-media">
             <a href="/product/{{ product.slug }}/{{ product.id }}">
               <img src="/media/{{ product.thumbnail }}" alt="Product image" class="product-image">
@@ -379,9 +443,10 @@
           <input type="hidden" class="product-title-{{ product.id }}" value="{{ product.name }}" />
           <input type="hidden" class="product-price-{{ product.id }}" value="{{ product.price }}" />
 
-          <div class="product-action">
-            <a href="#" class="btn-product add-to-cart" title="Add to cart" data-index="{{ product.id }}"><span>add
-                to cart</span></a>
+          <div class="flex justify-center  mb-2">
+            <a href="#" class="btn-product add-to-cart rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-4 transition duration-300 ease-in-out">
+              <span>add to cart</span>
+            </a>
           </div><!-- End .product-action -->
 
         </div><!-- End .product -->
